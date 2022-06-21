@@ -321,10 +321,10 @@ export default {
     return {
       valid: true,
       longLink: "",
-      longLinkRules: [(v) => !!v || "Long link is required"],
+      longLinkRules: [(v) => !!v || "Long URL is required"],
       linkName: "",
       linkRules: [
-        (v) => !!v || "Custom link is required",
+        (v) => !!v || "Custom Short URL is required",
         (v) =>
           (v && v.length >= 5) ||
           "Custom link must be greater than 5 characters",
@@ -339,11 +339,6 @@ export default {
       baseUrl: window.location.origin.split("//")[1],
       qrSize: "200",
       route: this.$route.name,
-    };
-  },
-  mounted() {
-    window.onscroll = () => {
-      this.changeColor();
     };
   },
   methods: {
@@ -369,9 +364,10 @@ export default {
                 .then(() => {
                   if (this.route == "Both") {
                     this.message =
-                      "The shortened URL and QR is successfuly created!";
+                      "The shortened URL and QR was successfully created!";
                   } else {
-                    this.message = "The shortened URL is successfuly created!";
+                    this.message =
+                      "The shortened URL was successfully created!";
                   }
                   this.notify = true;
                   this.shortened = true;
@@ -401,10 +397,12 @@ export default {
 
       try {
         var successful = document.execCommand("copy");
-        var msg = successful ? "successful" : "unsuccessful";
-        console.log("Shortened URL was copied " + msg);
+        var msg = successful ? "successfully" : "unsuccessfully";
+        this.message = "Shortened URL was copied " + msg;
+        this.notify = true;
       } catch (err) {
-        console.log("Oops, unable to copy");
+        this.message = "Oops, unable to copy";
+        this.notify = true;
       }
     },
     reset() {
@@ -430,7 +428,7 @@ export default {
     createQr() {
       if (this.$refs.form.validate()) {
         this.shortened = true;
-        this.message = "The QR is successfuly created!";
+        this.message = "The QR was successfuly created!";
         this.notify = true;
         return;
       }
@@ -439,6 +437,7 @@ export default {
     },
     reroute() {
       this.route = this.$route.name;
+      this.reset();
     },
   },
 };
