@@ -1,5 +1,7 @@
 <template>
-  <v-container> <h1>Redirecting you to...</h1> </v-container>
+  <div>
+    <v-snackbar v-model="notify"> Link does not exist </v-snackbar>
+  </div>
 </template>
 
 <script>
@@ -7,6 +9,11 @@ import db from "../firebase/firebaseInit";
 
 export default {
   name: "Redirect",
+  data() {
+    return {
+      notify: false,
+    };
+  },
 
   async created() {
     await db
@@ -17,14 +24,12 @@ export default {
         if (doc.exists) {
           window.location.href = doc.data().longLink;
         } else {
-          console.log("No such document!");
-          alert("Link does not exist!");
+          this.notify = true;
         }
       })
       .catch((error) => {
         console.log("Error getting document:", error);
       });
-
     // db.collection("links")
     //   .get()
     //   .then((querySnapshot) => {

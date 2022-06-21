@@ -1,8 +1,7 @@
 {
   "hosting": {
+    "site": "linkqr",
     "public": "dist",
-    "firebase": "ju-tay",
-    "target": "ju-tay",
     "ignore": [
       "firebase.json",
       "**/.*",

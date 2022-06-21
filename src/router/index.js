@@ -1,43 +1,36 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import BothCreate from '../views/BothCreate.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
-    name: 'Home',
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-
-  },
-  {
     path: '/:id',
     name: 'Redirect',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Redirect.vue')
+    component: () => import(/* webpackChunkName: "Redirect" */ '../views/Redirect.vue')
 
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    path: '/',
+    name: 'Home',
+    component: BothCreate
   },
+
   {
     path: '/create/qr',
     name: 'Qr',
-    component: () => import(/* webpackChunkName: "about" */ '../views/QrCreate.vue')
+    component: BothCreate,
   },
   {
     path: '/create/short-link',
     name: 'ShortLink',
-    component: () => import(/* webpackChunkName: "about" */ '../views/LinkCreate.vue')
+    component: BothCreate,
   },
   {
     path: '/create/qr-link',
-    name: 'Qr',
-    component: () => import(/* webpackChunkName: "about" */ '../views/BothCreate.vue')
+    name: 'Both',
+    component: BothCreate,
   },
 ]
 
