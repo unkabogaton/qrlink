@@ -66,7 +66,7 @@
     </v-app-bar>
     <v-img
       class="align-center pb-n16 text-center white--text"
-      max-height="300px"
+      :max-height="imageHeight"
       :src="require('../assets/cover.jpeg')"
       :lazy-src="require('../assets/cover.jpeg')"
       ><div v-if="route == 'Home'">
@@ -84,7 +84,7 @@
     <v-snackbar v-model="notify">
       {{ message }}
     </v-snackbar>
-    <div class="mt-n15 mb-7">
+    <div class="mt-15 mx-2 mt-sm-10 mt-md-n15 mb-7">
       <v-hover>
         <template v-slot:default="{ hover }">
           <v-card
@@ -121,7 +121,7 @@
                 ></v-card-title
               >
             </v-img>
-            <div class="pa-7">
+            <div class="pa-7 px-4 px-sm-7">
               <div v-if="route == 'Home'">
                 <v-btn
                   rounded
@@ -340,6 +340,17 @@ export default {
       qrSize: "200",
       route: this.$route.name,
     };
+  },
+  computed: {
+    imageHeight() {
+      if (this.$vuetify.breakpoint.mdAndUp) {
+        return "300";
+      } else if (this.$vuetify.breakpoint.smOnly) {
+        return "200";
+      } else {
+        return "90";
+      }
+    },
   },
   methods: {
     async createLink() {

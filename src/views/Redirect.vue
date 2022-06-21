@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-snackbar v-model="notify"> Link does not exist </v-snackbar>
+    <v-snackbar v-model="notify" centered> Link does not exist </v-snackbar>
   </div>
 </template>
 
@@ -25,10 +25,16 @@ export default {
           window.location.href = doc.data().longLink;
         } else {
           this.notify = true;
+          setTimeout(() => {
+            this.$router.push({ name: "Home" });
+          }, 1500);
         }
       })
       .catch((error) => {
         console.log("Error getting document:", error);
+        setTimeout(() => {
+          this.$router.push({ name: "Home" });
+        }, 1500);
       });
     // db.collection("links")
     //   .get()
